@@ -1,4 +1,4 @@
-        require([
+require([
       "esri/Map",
       "esri/layers/FeatureLayer",
       "esri/views/SceneView",
@@ -15,13 +15,14 @@
       "esri/symbols/callouts/LineCallout3D",
       "esri/tasks/QueryTask", 
       "esri/tasks/support/Query",
+      "esri/tasks/support/StatisticDefinition",
       "esri/widgets/LayerList",
      
      
 
       "dojo/domReady!"
     ], function(Map, FeatureLayer, SceneView, SceneLayer, SimpleRenderer, UniqueValueRenderer, PointSymbol3D, SimpleFillSymbol, IconSymbol3DLayer, LabelSymbol3D, TextSymbol3DLayer, MeshSymbol3D,  
-      FillSymbol3DLayer, LineCallout3D,QueryTask, Query, LayerList) {
+      FillSymbol3DLayer, LineCallout3D, QueryTask, Query, StatisticDefinition, LayerList) {
 
       // Create Map
       var map = new Map({
@@ -69,7 +70,6 @@
           position: "bottom-left"
       });
 
-     // console.log(popup);
 
         // autocasts as new PopupTemplate()
       var template = {
@@ -122,7 +122,6 @@
       var sceneLayer = new SceneLayer({
         url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/ArcGIS/rest/services/Kuningan_Building/SceneServer/layers/0",
         popupEnabled: false,
-        //popupTemplate: template
       });
 
 
@@ -132,7 +131,7 @@
         popupEnabled: true,
         popupTemplate: template
       });
-      //console.log(sceneLayer2);
+
 
       var zoning = new FeatureLayer({
         url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Kuningan_Zoning/FeatureServer/0",
@@ -141,22 +140,27 @@
           offset: 0.3
         },
         popupEnabled: false
-        //outFields: ["*"],
-        //popupTemplate: template
       });
-      //console.log(zoning);
 
+
+      // Create query task for zoning Feature Service
       var queryZoningTask = new QueryTask({
         url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Kuningan_Zoning/FeatureServer/0"  // URL of a feature layer representing Zoning
       });
 
       var query = new Query();
-      query.where="1=1";
-      query.outFields=["Sheet1__kode_blok,Sheet1__zona "];
-      query.orderByFields = ["Sheet1__kode_blok DESC"];
+      var statisticDefinition = new StatisticDefinition();
+
+        statisticDefinition.statisticType = "count";
+        statisticDefinition.onStatisticField = "Sheet1__zona";
+        statisticDefinition.outStatisticFieldName = "CountZona";
+        query.where = "1=1";
+        query.outFields=["Sheet1__zona", "CountZona"];
+        query.groupByFieldsForStatistics = ["Sheet1__zona"];
+        query.outStatistics = [statisticDefinition];
 
 
-      queryZoningTask.execute(query).then(function(result){
+        queryZoningTask.execute(query).then(function(result){
 
         console.log(result);
         
@@ -166,12 +170,12 @@
 
         //create loop for every result
         for (i = 0; i < result.features.length; i++) { 
+         console.log(result.features[i].attributes.CountZona); 
          console.log(result.features[i].attributes.Sheet1__zona);
-         console.log(result.features[i].attributes.Sheet1__kode_blok);
 
         //push result to variable array
+        data.push(result.features[i].attributes.CountZona);
         label.push(result.features[i].attributes.Sheet1__zona);
-        data.push(result.features[i].attributes.Sheet1__kode_blok);
         }
 
         var ctx = document.getElementById("myChart").getContext('2d');

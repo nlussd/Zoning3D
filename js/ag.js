@@ -15,12 +15,13 @@
       "esri/symbols/callouts/LineCallout3D",
       "esri/tasks/QueryTask", 
       "esri/tasks/support/Query",
+      "esri/widgets/LayerList",
      
      
 
       "dojo/domReady!"
     ], function(Map, FeatureLayer, SceneView, SceneLayer, SimpleRenderer, UniqueValueRenderer, PointSymbol3D, SimpleFillSymbol, IconSymbol3DLayer, LabelSymbol3D, TextSymbol3DLayer, MeshSymbol3D,  
-      FillSymbol3DLayer, LineCallout3D,QueryTask, Query) {
+      FillSymbol3DLayer, LineCallout3D,QueryTask, Query, LayerList) {
 
       // Create Map
       var map = new Map({
@@ -60,25 +61,24 @@
 
       popup = view.popup;
 
+      var layerList = new LayerList({
+          view: view
+      });
+      // Adds widget below other elements in the bottom left corner of the view
+      view.ui.add(layerList, {
+          position: "bottom-left"
+      });
+
      // console.log(popup);
 
         // autocasts as new PopupTemplate()
       var template = {
         title: "{Sheet1__zo}",
         content: "<p><b>Info Zonasi</b></p>" +
-          "<p>KECAMATAN: {Sheet1__ke}</p>"+ 
-          "<p>KELURAHAN: {Sheet1___1}</p>"+
-          "<p>KODE BLOK: {Sheet1__ko}</p>"+
-          "<p>SUB BLOK: {Sheet1__Su}</p>"+
-          "<p>SUB ZONA: {Sheet1___2}</p>"+
-          "<p>NAMA ZONA: {Sheet1__zo}</p>"+
-          "<p>KDB: {Sheet1__kd}</p>"+
-          "<p>KLB: {Sheet1__kl}</p>"+
-          "<p>KB: {Sheet1__kb}</p>"+
-          "<p>KDH: {Sheet1___3}</p>"+
-          "<p>TIPE: {Sheet1__ti}</p>"+
-          "<p>PSL: {Sheet1__ps}</p>"+
-          "<p>KTB: {Sheet1__kt}</p>",
+          "<p>KECAMATAN <b>{Sheet1__ke}</b>, KELURAHAN <b>{Sheet1___1}</b></p>"+
+          "<p>BLOK <b>{Sheet1__ko}</b>, SUB BLOK <b>{Sheet1__Su}</b>, SUB ZONA <b>{Sheet1___2}</b></p>"+
+          "<p><b>{Sheet1__zo}</b></p>"+
+          "<p>KDB <b>{Sheet1__kd}</b>, KLB <b>{Sheet1__kl}</b>, KB <b>{Sheet1__kb}</b>, KDH <b>{Sheet1___3}</b>, TIPE <b>{Sheet1__ti}</b>, PSL <b>{Sheet1__ps}</b>, KTB <b>{Sheet1__kt}</b></p>",
         fieldInfos: [{
           fieldName: "Sheet1__ke",
         }, 

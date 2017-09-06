@@ -30,8 +30,10 @@
               $(this).css("background-color", "#3285ff");
           });
           $('.clickBox').click(function(){
-              $('.clickBox').fadeOut(1000);
-              $('.welcome').fadeOut(1000);
+              $('.clickBox').hide();
+              $('.welcome').hide();
+              $('.chartContainer').fadeIn();
+
           });
         });
   </script>
@@ -43,12 +45,11 @@
 	 <div id="titleDiv"><b>Zoning 3D</b> App</div>
   </div>
   <div id="box">
-    <!-- <div class="chartContainer">
-    <h2>Chart.js — Bar Chart Demo</h2>
-      <div>
-    <canvas id="myChart"></canvas>
+  <div class="chartContainer">
+    <div>
+    <canvas id="myChart" height="200"></canvas>
     </div>
-  </div>  -->
+  </div> 
   <div class="welcome">
        Welcome to 3D Zoning App by Esri Indonesia. 
        <br>This app is meant to demonstrate 3D GIS capabilities in city planning. Developed with ArcGIS for Javascript API 4.4.

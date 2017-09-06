@@ -122,6 +122,8 @@ require([
       var sceneLayer = new SceneLayer({
         url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/ArcGIS/rest/services/Kuningan_Building/SceneServer/layers/0",
         popupEnabled: false,
+        title: "Existing Building",
+        visible: false
       });
 
 
@@ -129,7 +131,8 @@ require([
       var sceneLayer2 = new SceneLayer({
         url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/ArcGIS/rest/services/Kuningan_Zoning_Ext/SceneServer/layers/1",
         popupEnabled: true,
-        popupTemplate: template
+        popupTemplate: template,
+        title: "Zoning Building Envelope (3D)"
       });
 
 
@@ -139,7 +142,8 @@ require([
           mode: "absolute-height",
           offset: 0.3
         },
-        popupEnabled: false
+        popupEnabled: false,
+        title: "Zoning Layer (2D)"
       });
 
 
@@ -179,15 +183,34 @@ require([
         }
 
         var ctx = document.getElementById("myChart").getContext('2d');
+
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
               labels: label,
               datasets: [{
-                data: data
+                label: "Land Use",
+                data: data,
+                backgroundColor: ['rgba(255,153,50,0.9)', 'rgba(14,247,30,0.9)', 'rgba(112,34,3,0.9)', 'rgba(239,148,197,0.9)', 'rgba(249,4,17,0.9)',
+                'rgba(103,2,142,0.9)', 'rgba(217,140,247,0.9)', 'rgba(247,239,2,0.9)', 'rgba(249,245,109,0.9)', 'rgba(242,9,207,0.9)','rgba(79,249,79,0.9)', 
+                'rgba(32,165,232, 0.9)']
               }]
+            },
+            options:{
+              legend: { display: false },
+              title: {
+              display: true,
+              text: 'Zoning By The Number'
+                },
+              scales:{
+                xAxes: [{
+                display: false
+              
+                }],
             }
-        });
+            }
+
+        }); //gimana caranya ya ganti fontsize dkk... gw kok ga mudeng dokumentasi chartjs
 
         });
 

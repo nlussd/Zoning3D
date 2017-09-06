@@ -1,0 +1,65 @@
+<!--  3D Testing App ​-->
+<!-- Created with ArcGIS Javascript API 4.4, pace.js........... 
+      rough version 1-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>3D Test App</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <link rel="stylesheet" href="css/apptheme.css">
+  <!-- LoadingBar css-->
+  <link rel="stylesheet" href="css/dataurl.css"> 
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+  <!-- ArcGIS JS API 4.4 -->
+  <script src="https://js.arcgis.com/4.4/"></script>
+  <script src="js/ag.js"></script>
+  <!-- loading bar script -->
+  <script src="js/pace.min.js"></script>
+
+  <script>
+  $(document).ready(function(){
+          $('.clickBox').hover(function(){
+              $(this).css("background-color", "#a6c4fc");
+              }, function(){
+              $(this).css("background-color", "#3285ff");
+          });
+          $('.clickBox').click(function(){
+              $('.clickBox').hide();
+              $('.welcome').fadeOut(1000);
+          });
+        });
+  </script>
+
+</head>
+
+<body>
+  <div id="viewDiv">
+	 <div id="titleDiv"><b>Zoning 3D</b> App</div>
+  </div>
+  <div id="box">
+    <!-- <div class="chartContainer">
+    <h2>Chart.js — Bar Chart Demo</h2>
+      <div>
+    <canvas id="myChart"></canvas>
+    </div>
+  </div>  -->
+  <div class="welcome">
+       Welcome to 3D Zoning App by Esri Indonesia. This app is meant to demonstrate 3D GIS capabilities in city planning. Developed with ArcGIS for Javascript API 4.4.
+  </div>
+  <div class="clickBox">
+      Start
+  </div>
+   
+  </div>
+  <div id="footer">
+      <a href="http://esriindonesia.co.id" target="_blank"><img src="asset/esriwhite.png" height="35"></a>
+  </div>
+
+</body>
+</html>

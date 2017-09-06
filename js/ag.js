@@ -75,10 +75,7 @@
       var template = {
         title: "{Sheet1__zo}",
         content: "<p><b>Info Zonasi</b></p>" +
-          "<p>KECAMATAN <b>{Sheet1__ke}</b>, KELURAHAN <b>{Sheet1___1}</b></p>"+
-          "<p>BLOK <b>{Sheet1__ko}</b>, SUB BLOK <b>{Sheet1__Su}</b>, SUB ZONA <b>{Sheet1___2}</b></p>"+
-          "<p><b>{Sheet1__zo}</b></p>"+
-          "<p>KDB <b>{Sheet1__kd}</b>, KLB <b>{Sheet1__kl}</b>, KB <b>{Sheet1__kb}</b>, KDH <b>{Sheet1___3}</b>, TIPE <b>{Sheet1__ti}</b>, PSL <b>{Sheet1__ps}</b>, KTB <b>{Sheet1__kt}</b></p>",
+          "<p>KECAMATAN {Sheet1__ke}, KELURAHAN {Sheet1___1}. BLOK {Sheet1__ko}, SUB BLOK {Sheet1__Su}, SUB ZONA {Sheet1___2}. KDB {Sheet1__kd}, KLB {Sheet1__kl}, KB {Sheet1__kb}, KDH {Sheet1___3}, TIPE {Sheet1__ti}, PSL {Sheet1__ps}, KTB {Sheet1__kt}.</p>",
         fieldInfos: [{
           fieldName: "Sheet1__ke",
         }, 

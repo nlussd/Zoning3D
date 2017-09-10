@@ -17,12 +17,13 @@ require([
       "esri/tasks/support/Query",
       "esri/tasks/support/StatisticDefinition",
       "esri/widgets/LayerList",
+      "esri/widgets/Home",
      
      
 
       "dojo/domReady!"
     ], function(Map, FeatureLayer, SceneView, SceneLayer, SimpleRenderer, UniqueValueRenderer, PointSymbol3D, SimpleFillSymbol, IconSymbol3DLayer, LabelSymbol3D, TextSymbol3DLayer, MeshSymbol3D,  
-      FillSymbol3DLayer, LineCallout3D, QueryTask, Query, StatisticDefinition, LayerList) {
+      FillSymbol3DLayer, LineCallout3D, QueryTask, Query, StatisticDefinition, LayerList, Home) {
 
       // Create Map
       var map = new Map({
@@ -69,6 +70,14 @@ require([
       view.ui.add(layerList, {
           position: "bottom-left"
       });
+
+
+      // add home widget button
+      var homeWidget = new Home({
+        view: view
+      });
+
+      view.ui.add(homeWidget, "top-left");
 
 
         // autocasts as new PopupTemplate()
@@ -153,7 +162,10 @@ require([
       });
 
       var query = new Query();
+      var queryArea = new Query();
       var statisticDefinition = new StatisticDefinition();
+      var statisticDefinitionArea = new StatisticDefinition();
+    
 
         statisticDefinition.statisticType = "count";
         statisticDefinition.onStatisticField = "Sheet1__zona";
@@ -162,6 +174,16 @@ require([
         query.outFields=["Sheet1__zona", "CountZona"];
         query.groupByFieldsForStatistics = ["Sheet1__zona"];
         query.outStatistics = [statisticDefinition];
+
+
+        statisticDefinitionArea.statisticType = "sum";
+        statisticDefinitionArea.onStatisticField = "Sheet1__area";
+        statisticDefinitionArea.outStatisticFieldName = "CountArea";
+        queryArea.where = "1=1";
+        queryArea.outFields=["Sheet1__zona", "CountArea"];
+        queryArea.groupByFieldsForStatistics = ["Sheet1__zona"];
+        queryArea.outStatistics = [statisticDefinitionArea];
+
 
 
         queryZoningTask.execute(query).then(function(result){
@@ -210,9 +232,58 @@ require([
             }
             }
 
-        }); //gimana caranya ya ganti fontsize dkk... gw kok ga mudeng dokumentasi chartjs
+        }); 
 
         });
+
+
+
+        queryZoningTask.execute(queryArea).then(function(result){
+
+        console.log(result);
+        
+        //Crate variable for query result array untuk yang query area nich
+        var labelArea = [];
+        var dataArea = [];
+
+        //create loop for every result
+        for (i = 0; i < result.features.length; i++) { 
+         console.log(result.features[i].attributes.CountArea); 
+         console.log(result.features[i].attributes.Sheet1__zona);
+
+        //push result to variable array
+        dataArea.push(result.features[i].attributes.CountArea);
+        labelArea.push(result.features[i].attributes.Sheet1__zona);
+        }
+
+        // var ctx = document.getElementById("pie-chart").getContext('2d');
+
+        //      var myPieChart = new Chart(ctx,{
+        //           type: 'bar',
+        //           data: {
+        //             labels: labelArea,
+        //             datasets: [{
+        //               // label: "Land Use",
+        //               data: dataArea,
+        //               backgroundColor: ['rgba(255,153,50,0.9)', 'rgba(14,247,30,0.9)', 'rgba(112,34,3,0.9)', 'rgba(239,148,197,0.9)', 'rgba(249,4,17,0.9)',
+        //         'rgba(103,2,142,0.9)', 'rgba(217,140,247,0.9)', 'rgba(247,239,2,0.9)', 'rgba(249,245,109,0.9)', 'rgba(242,9,207,0.9)','rgba(79,249,79,0.9)', 
+        //         'rgba(32,165,232, 0.9)']
+        //             }]
+        //           },
+        //           options: options
+        //       });
+
+        }); 
+
+      
+
+
+
+
+
+
+
+
 
 
       //add FeatureLayer and SceneLayer to map

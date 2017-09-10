@@ -32,7 +32,9 @@
           $('.clickBox').click(function(){
               $('.clickBox').hide();
               $('.welcome').hide();
+              $('#button').fadeIn();
               $('.chartContainer').fadeIn();
+              $('.clickBoxMain').fadeIn();
 
           });
         });
@@ -45,9 +47,19 @@
 	 <div id="titleDiv"><b>Zoning 3D</b> App</div>
   </div>
   <div id="box">
+ <div class="clickBoxMain">Home</div>
+ <div class="clickBoxMain">Test</div>
+  <div class="clickBoxMain">Test</div>
+  <div class="clickBoxMain">Test</div>
+  <br class="clearFloat">
   <div class="chartContainer">
     <div>
-    <canvas id="myChart" height="200"></canvas>
+    <canvas id="myChart" height="150"></canvas>
+    </div>
+  </div> 
+  <div class="chartContainer">
+    <div>
+    <canvas id="myPieChart" height="150"></canvas>
     </div>
   </div> 
   <div class="welcome">

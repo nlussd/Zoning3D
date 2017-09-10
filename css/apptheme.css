@@ -37,7 +37,19 @@ html, body,
     height: calc(100% - 35px);
     right: 0px;
     width: 450px;
-    z-index: 100;
+    z-index: 110;
+}
+
+#button{
+  position: absolute;
+  top: 0px;
+  height: 10%;
+  width: 450px;
+  z-index: 101;
+  background-color: gray;
+  display: none;
+/*  margin: 0px auto 30px;*/
+  padding: 10px;
 }
 
 .chartContainer {
@@ -47,6 +59,15 @@ html, body,
   display: none;
   font-size: 10pt;
 }
+
+.chartContainer2 {
+  width: 80%;
+  margin: 15px auto;
+  z-index: 1;
+  display: none;
+  font-size: 10pt;
+}
+
 
 .welcome{
   height: 100px;
@@ -70,6 +91,29 @@ html, body,
   border: 1px solid;
   color: #ffffff;
   box-shadow: 0px 1px 0.2px #888888;
+}
+
+.clickBoxMain{
+  float: right;
+  height: 20px;
+  width: 50px;
+  z-index: 110;
+  background-color: #3285ff;
+  margin-right: 30px;
+  margin: 20px 0px 30px 0px;
+  text-align: center;
+  font-size: 14pt;
+  padding: 10px;
+  font-family: "Source Sans Pro", sans-serif;
+  border: 0.5px solid;
+  color: #ffffff;
+  border-radius: 5px;
+/*  box-shadow: 0px 1px 0.2px #888888;*/
+  display: none;
+}
+
+.clearFloat{
+  clear: both;
 }
 
 #footer{

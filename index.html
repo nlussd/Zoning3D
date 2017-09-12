@@ -15,30 +15,20 @@
   <link rel="stylesheet" href="css/dataurl.css"> 
   <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script> -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
   <!-- ArcGIS JS API 4.4 -->
   <script src="https://js.arcgis.com/4.4/"></script>
   <script src="js/ag.js"></script>
+  <script src="js/viz.js"></script>
+<!--   <script src="js/charted.js"></script> -->
   <!-- loading bar script -->
   <script src="js/pace.min.js"></script>
-
-  <script>
-  $(document).ready(function(){
-          $('.clickBox').hover(function(){
-              $(this).css("background-color", "#a6c4fc");
-              }, function(){
-              $(this).css("background-color", "#3285ff");
-          });
-          $('.clickBox').click(function(){
-              $('.clickBox').hide();
-              $('.welcome').hide();
-              $('#button').fadeIn();
-              $('.chartContainer').fadeIn();
-              $('.clickBoxMain').fadeIn();
-
-          });
-        });
-  </script>
 
 </head>
 
@@ -47,21 +37,11 @@
 	 <div id="titleDiv"><b>Zoning 3D</b> App</div>
   </div>
   <div id="box">
- <div class="clickBoxMain">Home</div>
+ <div class="clickBoxMain clickHome">Home</div>
  <div class="clickBoxMain">Test</div>
   <div class="clickBoxMain">Test</div>
   <div class="clickBoxMain">Test</div>
   <br class="clearFloat">
-  <div class="chartContainer">
-    <div>
-    <canvas id="myChart" height="150"></canvas>
-    </div>
-  </div> 
-  <div class="chartContainer">
-    <div>
-    <canvas id="myPieChart" height="150"></canvas>
-    </div>
-  </div> 
   <div class="welcome">
        Welcome to 3D Zoning App by Esri Indonesia. 
        <br>This app is meant to demonstrate 3D GIS capabilities in city planning. Developed with ArcGIS for Javascript API 4.4.
@@ -69,7 +49,8 @@
   <div class="clickBox">
       Start
   </div>
-   
+  <div id="chartdiv"></div>
+  <div id="chartdiv2"></div>
   </div>
   <div id="footer">
       <a href="http://esriindonesia.co.id" target="_blank"><img src="asset/esriwhite.png" height="35"></a>

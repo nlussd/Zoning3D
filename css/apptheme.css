@@ -52,22 +52,23 @@ html, body,
   padding: 10px;
 }
 
-.chartContainer {
+#chartdiv {
   width: 80%;
+  height: 200px;
   margin: 15px auto;
   z-index: 1;
   display: none;
   font-size: 10pt;
 }
 
-.chartContainer2 {
+#chartdiv2 {
   width: 80%;
+  height: 200px;
   margin: 15px auto;
   z-index: 1;
   display: none;
   font-size: 10pt;
 }
-
 
 .welcome{
   height: 100px;
@@ -127,6 +128,12 @@ html, body,
   padding: 15px;
   text-align: right;
 }
+
+.clickHome{
+
+}
+
+
 
 
 	

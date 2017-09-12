@@ -202,37 +202,63 @@ require([
         //push result to variable array
         data.push(result.features[i].attributes.CountZona);
         label.push(result.features[i].attributes.Sheet1__zona);
+
         }
 
-        var ctx = document.getElementById("myChart").getContext('2d');
+        console.log(label);
 
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: label,
-              datasets: [{
-                label: "Land Use",
-                data: data,
-                backgroundColor: ['rgba(255,153,50,0.9)', 'rgba(14,247,30,0.9)', 'rgba(112,34,3,0.9)', 'rgba(239,148,197,0.9)', 'rgba(249,4,17,0.9)',
-                'rgba(103,2,142,0.9)', 'rgba(217,140,247,0.9)', 'rgba(247,239,2,0.9)', 'rgba(249,245,109,0.9)', 'rgba(242,9,207,0.9)','rgba(79,249,79,0.9)', 
-                'rgba(32,165,232, 0.9)']
-              }]
-            },
-            options:{
-              legend: { display: false },
-              title: {
-              display: true,
-              text: 'Zoning By The Number'
-                },
-              scales:{
-                xAxes: [{
-                display: false
-              
-                }],
-            }
-            }
+        // create data format for amcharts
 
-        }); 
+        var serialData = [];
+
+        for (a = 0; a < label.length; a++){
+          serialData.push({
+            "CZ" : label[a],
+            "DZ" : data[a]
+          })
+        }
+
+        console.log(serialData);
+
+        var chart = AmCharts.makeChart( "chartdiv", {
+              "type": "serial",
+              "theme": "light",
+              "dataProvider": serialData,
+              "valueAxes": [ {
+                "gridColor": "#FFFFFF",
+                "gridAlpha": 0.2,
+                "dashLength": 0
+              } ],
+              "gridAboveGraphs": true,
+              "startDuration": 1,
+              "graphs": [ {
+                "balloonText": "[[category]]: <b>[[value]]</b>",
+                "fillAlphas": 0.8,
+                "lineAlpha": 0.2,
+                "type": "column",
+                "valueField": "DZ"
+              } ],
+              "chartCursor": {
+                "categoryBalloonEnabled": false,
+                "cursorAlpha": 0,
+                "zoomable": false
+              },
+              "categoryField": "CZ",
+              "categoryAxis": {
+                "autoRotateAngle": 57.6,
+                "autoRotateCount": 0,
+                "fontSize": 0,
+                "gridPosition": "start",
+                "gridAlpha": 0,
+                "tickPosition": "start",
+                "tickLength": 20
+              },
+              "export": {
+                "enabled": false
+              }
+
+            } );
+      
 
         });
 
@@ -256,34 +282,39 @@ require([
         labelArea.push(result.features[i].attributes.Sheet1__zona);
         }
 
-        // var ctx = document.getElementById("pie-chart").getContext('2d');
+        var pieData = [];
 
-        //      var myPieChart = new Chart(ctx,{
-        //           type: 'bar',
-        //           data: {
-        //             labels: labelArea,
-        //             datasets: [{
-        //               // label: "Land Use",
-        //               data: dataArea,
-        //               backgroundColor: ['rgba(255,153,50,0.9)', 'rgba(14,247,30,0.9)', 'rgba(112,34,3,0.9)', 'rgba(239,148,197,0.9)', 'rgba(249,4,17,0.9)',
-        //         'rgba(103,2,142,0.9)', 'rgba(217,140,247,0.9)', 'rgba(247,239,2,0.9)', 'rgba(249,245,109,0.9)', 'rgba(242,9,207,0.9)','rgba(79,249,79,0.9)', 
-        //         'rgba(32,165,232, 0.9)']
-        //             }]
-        //           },
-        //           options: options
-        //       });
+
+        for (b = 0; b < labelArea.length; b++){
+          pieData.push({
+            "Zone" : labelArea[b],
+            "Area" : dataArea[b]
+          })
+        }
+
+        console.log(pieData);
+
+        var pie = AmCharts.makeChart("chartdiv2",
+        {
+          "type": "pie",
+          "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+          "titleField": "Zone",
+          "valueField": "Area",
+          "fontSize": 6,
+          "allLabels": [],
+          "balloon": {},
+          "legend": {
+            "enabled": false,
+            "align": "center",
+            "markerType": "circle"
+          },
+          "titles": [],
+          "dataProvider": pieData
+        }
+      );
+
 
         }); 
-
-      
-
-
-
-
-
-
-
-
 
 
       //add FeatureLayer and SceneLayer to map

@@ -37,10 +37,10 @@ require([
       var view = new SceneView({
         container: "viewDiv",
         map: map,
-        center: [106.809205, -6.248750],
+        center: [106.807595, -6.210656],
         camera: {
-          position: [106.809205, -6.248750, 707],
-          tilt: 81,
+          position: [106.807595, -6.210656, 707],
+          tilt: 70,
           heading: 50
         },
         environment: {

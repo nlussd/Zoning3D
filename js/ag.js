@@ -86,7 +86,7 @@ require([
       var template = {
         title: "{Sheet1__zo}",
         content: "<p><b>Info Zonasi</b></p>" +
-          "<p>KECAMATAN {Sheet1__ke}, KELURAHAN {Sheet1___1}. BLOK {Sheet1__ko}, SUB BLOK {Sheet1__Su}, SUB ZONA {Sheet1___2}. KDB {Sheet1__kd}, KLB {Sheet1__kl}, KB {Sheet1__kb}, KDH {Sheet1___3}, TIPE {Sheet1__ti}, PSL {Sheet1__ps}, KTB {Sheet1__kt}.</p>",
+          "<p>KECAMATAN {Sheet1__ke}, KELURAHAN {Sheet1___1}. BLOK {Sheet1__ko}, SUB BLOK {Sheet1__Su}, SUB ZONA {Sheet1___2}. KDB {kdb}, KLB {klb}, KB {kb}, KDH {kdh}, TIPE {tipe}, PSL {psl}, KTB {ktb}.</p>",
         fieldInfos: [{
           fieldName: "Sheet1__ke",
         }, 
@@ -106,25 +106,25 @@ require([
           fieldName: "Sheet1__zo",
         },
         {
-          fieldName: "Sheet1__kd",
+          fieldName: "kdb",
         },
         {
-          fieldName: "Sheet1__kl",
+          fieldName: "klb",
         },
         {
-          fieldName: "Sheet1__kb",
+          fieldName: "kb",
         },
         {
-          fieldName: "Sheet1___3",
+          fieldName: "kdh",
         },
         {
-          fieldName: "Sheet1__ti",
+          fieldName: "tipe",
         },
         {
-          fieldName: "Sheet1__ps",
+          fieldName: "psl",
         },
         {
-          fieldName: "Sheet1__kt",
+          fieldName: "ktb",
         }
         ]
       };
@@ -140,7 +140,7 @@ require([
 
       // create SceneLayer for zoning 3D and add to map
       var sceneLayer2 = new SceneLayer({
-        url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/ArcGIS/rest/services/Kuningan_Zoning_Ext/SceneServer/layers/1",
+        url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Bundaran_HI_Zoning_3D/SceneServer/layers/1",
         popupEnabled: true,
         popupTemplate: template,
         title: "Zoning Building Envelope (3D)"
@@ -148,7 +148,7 @@ require([
 
 
       var zoning = new FeatureLayer({
-        url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Kuningan_Zoning/FeatureServer/0",
+        url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Bundaran_HI_Zoning/FeatureServer/0",
         elevationInfo: {
           mode: "absolute-height",
           offset: 0.3
@@ -172,7 +172,7 @@ require([
 
       // Create query task for zoning Feature Service
       var queryZoningTask = new QueryTask({
-        url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Kuningan_Zoning/FeatureServer/0"  // URL of a feature layer representing Zoning
+        url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Bundaran_HI_Zoning/FeatureServer/0"  // URL of a feature layer representing Zoning
       });
 
       var query = new Query();
@@ -402,6 +402,8 @@ require([
 
 
         }); 
+
+
 
 
       //add FeatureLayer and SceneLayer to map

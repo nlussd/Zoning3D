@@ -11,6 +11,8 @@
               $('#chartdiv').fadeIn();
               $('#chartdiv2').fadeIn();
               $('.clickBoxMain').fadeIn();
+              $('.desc').fadeIn();
+              $('.summary').fadeIn();
           });
           $('.clickBoxMain.clickHome').hover(function(){
               $(this).css("background-color", "#a6c4fc");
@@ -21,8 +23,17 @@
               $('#chartdiv').hide();
               $('#chartdiv2').hide();
               $('.clickBoxMain').hide();
+              $('.desc').hide();
+              $('.summary').hide();
+              $('#summaryTxt').hide();
               $('.welcome').show();
               $('.clickBox').show();
           });
+          $('.summary').click(function(){
+              $('#chartdiv').toggle();
+              $('#chartdiv2').toggle();
+              $('#summaryTxt').toggle();
+          });
+
 
         });

@@ -18,12 +18,13 @@ require([
       "esri/tasks/support/StatisticDefinition",
       "esri/widgets/LayerList",
       "esri/widgets/Home",
+      "esri/widgets/Legend",
      
      
 
       "dojo/domReady!"
     ], function(Map, FeatureLayer, SceneView, SceneLayer, SimpleRenderer, UniqueValueRenderer, PointSymbol3D, SimpleFillSymbol, IconSymbol3DLayer, LabelSymbol3D, TextSymbol3DLayer, MeshSymbol3D,  
-      FillSymbol3DLayer, LineCallout3D, QueryTask, Query, StatisticDefinition, LayerList, Home) {
+      FillSymbol3DLayer, LineCallout3D, QueryTask, Query, StatisticDefinition, LayerList, Home, Legend) {
 
       // Create Map
       var map = new Map({
@@ -70,6 +71,7 @@ require([
       view.ui.add(layerList, {
           position: "bottom-left"
       });
+
 
 
       // add home widget button
@@ -156,6 +158,18 @@ require([
       });
 
 
+
+      //  var legend = new Legend({
+      //       view: view,
+      //       layerInfos: [{
+      //         layer: zoning,
+      //         title: "Zonasi"
+      //       }]
+      //     });
+
+      // view.ui.add(legend, "top-right");
+
+
       // Create query task for zoning Feature Service
       var queryZoningTask = new QueryTask({
         url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Kuningan_Zoning/FeatureServer/0"  // URL of a feature layer representing Zoning
@@ -220,44 +234,44 @@ require([
 
         console.log(serialData);
 
-        var chart = AmCharts.makeChart( "chartdiv", {
-              "type": "serial",
-              "theme": "light",
-              "dataProvider": serialData,
-              "valueAxes": [ {
-                "gridColor": "#FFFFFF",
-                "gridAlpha": 0.2,
-                "dashLength": 0
-              } ],
-              "gridAboveGraphs": true,
-              "startDuration": 1,
-              "graphs": [ {
-                "balloonText": "[[category]]: <b>[[value]]</b>",
-                "fillAlphas": 0.8,
-                "lineAlpha": 0.2,
-                "type": "column",
-                "valueField": "DZ"
-              } ],
-              "chartCursor": {
-                "categoryBalloonEnabled": false,
-                "cursorAlpha": 0,
-                "zoomable": false
-              },
-              "categoryField": "CZ",
-              "categoryAxis": {
-                "autoRotateAngle": 57.6,
-                "autoRotateCount": 0,
-                "fontSize": 0,
-                "gridPosition": "start",
-                "gridAlpha": 0,
-                "tickPosition": "start",
-                "tickLength": 20
-              },
-              "export": {
-                "enabled": false
-              }
+        // var chart = AmCharts.makeChart( "chartdiv", {
+        //       "type": "serial",
+        //       "theme": "light",
+        //       "dataProvider": serialData,
+        //       "valueAxes": [ {
+        //         "gridColor": "#FFFFFF",
+        //         "gridAlpha": 0.2,
+        //         "dashLength": 0
+        //       } ],
+        //       "gridAboveGraphs": true,
+        //       "startDuration": 1,
+        //       "graphs": [ {
+        //         "balloonText": "[[category]]: <b>[[value]]</b>",
+        //         "fillAlphas": 0.8,
+        //         "lineAlpha": 0.2,
+        //         "type": "column",
+        //         "valueField": "DZ"
+        //       } ],
+        //       "chartCursor": {
+        //         "categoryBalloonEnabled": false,
+        //         "cursorAlpha": 0,
+        //         "zoomable": false
+        //       },
+        //       "categoryField": "CZ",
+        //       "categoryAxis": {
+        //         "autoRotateAngle": 57.6,
+        //         "autoRotateCount": 0,
+        //         "fontSize": 0,
+        //         "gridPosition": "start",
+        //         "gridAlpha": 0,
+        //         "tickPosition": "start",
+        //         "tickLength": 20
+        //       },
+        //       "export": {
+        //         "enabled": false
+        //       }
 
-            } );
+        //     } );
       
 
         });
@@ -294,24 +308,83 @@ require([
 
         console.log(pieData);
 
+
         var pie = AmCharts.makeChart("chartdiv2",
         {
           "type": "pie",
-          "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+          "balloonText": "[[title]]<br><span style='font-size:14px'>([[percents]]%)</span>",
           "titleField": "Zone",
           "valueField": "Area",
-          "fontSize": 6,
+          "labelRadius": 1,
+          "labelTickAlpha": 0,
+          "fontSize": 0,
           "allLabels": [],
           "balloon": {},
           "legend": {
-            "enabled": false,
+            "enabled": true,
+            "switchType": "v",
             "align": "center",
-            "markerType": "circle"
+            "bottom": 0,
+            "fontSize": 7,
+            "left": 6,
+            "marginBottom": -3,
+            "markerLabelGap": 4,
+            "markerSize": 13,
+            "position": "right",
+            "tabIndex": -1,
+            "valueText": ""
           },
           "titles": [],
           "dataProvider": pieData
         }
       );
+
+
+        var chart = AmCharts.makeChart( "chartdiv", {
+              "type": "serial",
+              "theme": "light",
+              "dataProvider": pieData,
+              "valueAxes": [ {
+                "gridColor": "#FFFFFF",
+                "gridAlpha": 0.2,
+                "dashLength": 0
+              } ],
+              // "titles": [
+              //   {
+              //     "id": "1",
+              //     "size": 15,
+              //     "text": "Zoning by Area"
+              //   }
+              // ],
+              "gridAboveGraphs": true,
+              "startDuration": 1,
+              "graphs": [ {
+                "balloonText": "[[category]]: <b>[[value]]</b>",
+                "fillAlphas": 0.8,
+                "lineAlpha": 0.2,
+                "type": "column",
+                "valueField": "Area"
+              } ],
+              "chartCursor": {
+                "categoryBalloonEnabled": false,
+                "cursorAlpha": 0,
+                "zoomable": false
+              },
+              "categoryField": "Zone",
+              "categoryAxis": {
+                "autoRotateAngle": 57.6,
+                "autoRotateCount": 0,
+                "fontSize": 0,
+                "gridPosition": "start",
+                "gridAlpha": 0,
+                "tickPosition": "start",
+                "tickLength": 20
+              },
+              "export": {
+                "enabled": false
+              }
+
+            } );
 
 
         }); 

@@ -7,7 +7,7 @@ html, body,
    height: 100%;
    width: 100%;
     }
-	
+  
 #viewDiv {
     margin-bottom: 0px;
     width: calc(100% - 450px);
@@ -24,7 +24,7 @@ html, body,
     top: 0;
     right: 15px;
     font-size: 200%;
-	  font-family: "Source Sans Pro", sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     height: 5%;
     width: 25%;
     text-align: center;
@@ -67,7 +67,7 @@ html, body,
 
 #chartdiv {
   width: 95%;
-  height: 200px;
+  height: 30%;
   margin: auto;
   z-index: 1;
   display: none;
@@ -76,7 +76,7 @@ html, body,
 
 #chartdiv2 {
   width: 95%;
-  height: 200px;
+  height: 30%S;
   margin: auto;
   z-index: 1;
   display: none;
@@ -132,7 +132,7 @@ html, body,
 
 .summary{
   /*float: left;*/
-  height: 20px;
+  height: 30px;
   width: 100px;
   z-index: 110;
   background-color: white;
@@ -154,9 +154,10 @@ html, body,
   margin: auto;
   z-index: 110;
   display: none;
-  font-size: 10pt;
+  font-size: 9pt;
   padding: 10px;
   font-family: "Source Sans Pro", sans-serif;
+  /*background-color: gray;*/
 }
 
 
@@ -183,4 +184,4 @@ html, body,
 
 
 
-	
+  

@@ -19,12 +19,14 @@ require([
       "esri/widgets/LayerList",
       "esri/widgets/Home",
       "esri/widgets/Legend",
-     
-     
 
+
+      "dojo/dom-construct", 
+      "dojo/dom", 
+      "dojo/on", 
       "dojo/domReady!"
     ], function(Map, FeatureLayer, SceneView, SceneLayer, SimpleRenderer, UniqueValueRenderer, PointSymbol3D, SimpleFillSymbol, IconSymbol3DLayer, LabelSymbol3D, TextSymbol3DLayer, MeshSymbol3D,  
-      FillSymbol3DLayer, LineCallout3D, QueryTask, Query, StatisticDefinition, LayerList, Home, Legend) {
+      FillSymbol3DLayer, LineCallout3D, QueryTask, Query, StatisticDefinition, LayerList, Home, Legend, domConstruct, dom, on) {
 
       // Create Map
       var map = new Map({
@@ -175,20 +177,10 @@ require([
         url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Bundaran_HI_Zoning/FeatureServer/0"  // URL of a feature layer representing Zoning
       });
 
-      var query = new Query();
+
       var queryArea = new Query();
-      var statisticDefinition = new StatisticDefinition();
       var statisticDefinitionArea = new StatisticDefinition();
     
-
-        statisticDefinition.statisticType = "count";
-        statisticDefinition.onStatisticField = "Sheet1__zona";
-        statisticDefinition.outStatisticFieldName = "CountZona";
-        query.where = "1=1";
-        query.outFields=["Sheet1__zona", "CountZona"];
-        query.groupByFieldsForStatistics = ["Sheet1__zona"];
-        query.outStatistics = [statisticDefinition];
-
 
         statisticDefinitionArea.statisticType = "sum";
         statisticDefinitionArea.onStatisticField = "Sheet1__area";
@@ -197,85 +189,6 @@ require([
         queryArea.outFields=["Sheet1__zona", "CountArea"];
         queryArea.groupByFieldsForStatistics = ["Sheet1__zona"];
         queryArea.outStatistics = [statisticDefinitionArea];
-
-
-
-        queryZoningTask.execute(query).then(function(result){
-
-        console.log(result);
-        
-        //Crate variable for query result array
-        var label = [];
-        var data = [];
-
-        //create loop for every result
-        for (i = 0; i < result.features.length; i++) { 
-         console.log(result.features[i].attributes.CountZona); 
-         console.log(result.features[i].attributes.Sheet1__zona);
-
-        //push result to variable array
-        data.push(result.features[i].attributes.CountZona);
-        label.push(result.features[i].attributes.Sheet1__zona);
-
-        }
-
-        console.log(label);
-
-        // create data format for amcharts
-
-        var serialData = [];
-
-        for (a = 0; a < label.length; a++){
-          serialData.push({
-            "CZ" : label[a],
-            "DZ" : data[a]
-          })
-        }
-
-        console.log(serialData);
-
-        // var chart = AmCharts.makeChart( "chartdiv", {
-        //       "type": "serial",
-        //       "theme": "light",
-        //       "dataProvider": serialData,
-        //       "valueAxes": [ {
-        //         "gridColor": "#FFFFFF",
-        //         "gridAlpha": 0.2,
-        //         "dashLength": 0
-        //       } ],
-        //       "gridAboveGraphs": true,
-        //       "startDuration": 1,
-        //       "graphs": [ {
-        //         "balloonText": "[[category]]: <b>[[value]]</b>",
-        //         "fillAlphas": 0.8,
-        //         "lineAlpha": 0.2,
-        //         "type": "column",
-        //         "valueField": "DZ"
-        //       } ],
-        //       "chartCursor": {
-        //         "categoryBalloonEnabled": false,
-        //         "cursorAlpha": 0,
-        //         "zoomable": false
-        //       },
-        //       "categoryField": "CZ",
-        //       "categoryAxis": {
-        //         "autoRotateAngle": 57.6,
-        //         "autoRotateCount": 0,
-        //         "fontSize": 0,
-        //         "gridPosition": "start",
-        //         "gridAlpha": 0,
-        //         "tickPosition": "start",
-        //         "tickLength": 20
-        //       },
-        //       "export": {
-        //         "enabled": false
-        //       }
-
-        //     } );
-      
-
-        });
-
 
 
         queryZoningTask.execute(queryArea).then(function(result){
@@ -307,6 +220,21 @@ require([
         }
 
         console.log(pieData);
+
+        var resultItems = [];
+
+        for (c = 0; c < result.features.length; c++) { 
+          var featureAttributes = result.features[c].attributes;
+            for (var attr in featureAttributes) {
+                resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
+              }
+
+              resultItems.push("<br>");
+        }
+
+      
+        dom.byId("summaryTxt").innerHTML = resultItems.join("");
+
 
 
         var pie = AmCharts.makeChart("chartdiv2",
@@ -568,6 +496,12 @@ require([
       );
 
       zoning.renderer = zoningRenderer
+
+
+
+      // on(dom.byId("summary"), "click", function(){
+      //     var row = domConstruct.toDom("<tr><td>bar</td><td>Bar is also good</td></tr>");
+      //     // domConstruct.place(row, "example");
 
 
     });

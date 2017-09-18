@@ -223,18 +223,23 @@ require([
 
         var resultItems = [];
 
+        var alias = {};
+        alias["CountArea"] = "Total Area (m2)";
+        alias["Sheet1__zona"] = "Zona";
+
         for (c = 0; c < result.features.length; c++) { 
           var featureAttributes = result.features[c].attributes;
             for (var attr in featureAttributes) {
-                resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
+                resultItems.push("<b>" + alias[attr]+ ":</b>  " + featureAttributes[attr] + "<br>");
               }
 
               resultItems.push("<br>");
         }
 
+
+
       
         dom.byId("summaryTxt").innerHTML = resultItems.join("");
-
 
 
         var pie = AmCharts.makeChart("chartdiv2",

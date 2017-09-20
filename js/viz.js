@@ -16,6 +16,12 @@
           $('.summary').click(function(){
               $('#chartdiv, #chartdiv2, #summaryTxt').toggle();
           });
+          $('.clickSummary').click(function(){
+              $('.clickBox, .welcome, #button, #search, #execute').hide();
+              $('.desc').show();
+              $('.descTxt').text("We can see charts and statistics of zoning areas here");
+              $('#chartdiv, #chartdiv2, .summary').fadeIn();
+          });
           $('.clickSearch').click(function(){
               $('.clickBox, .welcome, #button, #chartdiv, #chartdiv2, .summary, #summaryTxt').hide();
               $('.desc').show();
@@ -25,7 +31,7 @@
 
 
 
-         
+
 
 
         });

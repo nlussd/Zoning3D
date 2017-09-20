@@ -13,7 +13,7 @@ require([
       "esri/symbols/MeshSymbol3D",
       "esri/symbols/FillSymbol3DLayer",
       "esri/symbols/callouts/LineCallout3D",
-      "esri/tasks/QueryTask", 
+      "esri/tasks/QueryTask",
       "esri/tasks/support/Query",
       "esri/tasks/support/StatisticDefinition",
       "esri/widgets/LayerList",
@@ -21,11 +21,11 @@ require([
       "esri/widgets/Legend",
 
 
-      "dojo/dom-construct", 
-      "dojo/dom", 
-      "dojo/on", 
+      "dojo/dom-construct",
+      "dojo/dom",
+      "dojo/on",
       "dojo/domReady!"
-    ], function(Map, FeatureLayer, SceneView, SceneLayer, SimpleRenderer, UniqueValueRenderer, PointSymbol3D, SimpleFillSymbol, IconSymbol3DLayer, LabelSymbol3D, TextSymbol3DLayer, MeshSymbol3D,  
+    ], function(Map, FeatureLayer, SceneView, SceneLayer, SimpleRenderer, UniqueValueRenderer, PointSymbol3D, SimpleFillSymbol, IconSymbol3DLayer, LabelSymbol3D, TextSymbol3DLayer, MeshSymbol3D,
       FillSymbol3DLayer, LineCallout3D, QueryTask, Query, StatisticDefinition, LayerList, Home, Legend, domConstruct, dom, on) {
 
       // Create Map
@@ -91,7 +91,7 @@ require([
           "<p>KECAMATAN {Sheet1__ke}, KELURAHAN {Sheet1___1}. BLOK {Sheet1__ko}, SUB BLOK {Sheet1__Su}, SUB ZONA {Sheet1___2}. KDB {kdb}, KLB {klb}, KB {kb}, KDH {kdh}, TIPE {tipe}, PSL {psl}, KTB {ktb}.</p>",
         fieldInfos: [{
           fieldName: "Sheet1__ke",
-        }, 
+        },
         {
           fieldName: "Sheet1___1",
         },
@@ -133,7 +133,7 @@ require([
 
    // Create SceneLayer and add to the map
       var sceneLayer = new SceneLayer({
-        url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/ArcGIS/rest/services/Kuningan_Building/SceneServer/layers/0",
+        url: "https://tiles.arcgis.com/tiles/TWq7UjmDRPE14lEV/arcgis/rest/services/bundaran_HI_sample_building/SceneServer",
         popupEnabled: false,
         title: "Existing Building",
         visible: false
@@ -180,7 +180,7 @@ require([
 
       var queryArea = new Query();
       var statisticDefinitionArea = new StatisticDefinition();
-    
+
 
         statisticDefinitionArea.statisticType = "sum";
         statisticDefinitionArea.onStatisticField = "Sheet1__area";
@@ -194,14 +194,14 @@ require([
         queryZoningTask.execute(queryArea).then(function(result){
 
         console.log(result);
-        
+
         //Crate variable for query result array untuk yang query area nich
         var labelArea = [];
         var dataArea = [];
 
         //create loop for every result
-        for (i = 0; i < result.features.length; i++) { 
-         console.log(result.features[i].attributes.CountArea); 
+        for (i = 0; i < result.features.length; i++) {
+         console.log(result.features[i].attributes.CountArea);
          console.log(result.features[i].attributes.Sheet1__zona);
 
         //push result to variable array
@@ -210,12 +210,29 @@ require([
         }
 
         var pieData = [];
+        var colorData = ["#ff9932", "#0ef71e", "#702203", "#ef94c5","#67028e","#f7ef02","#f9f56d", "#f209cf","#4ff94f","#20a5e8"];
+        var aliasZona = [];
+        aliasZona["ZONA CAMPURAN"] = "CAMPURAN";
+        aliasZona["ZONA JALUR HIJAU"] = "JALUR HIJAU";
+        aliasZona["ZONA PELAYANAN UMUM DAN SOSIAL"] = "PELAYANAN UMUM DAN SOSIAL";
+        aliasZona["ZONA PEMERINTAHAN DAERAH"] = "PEMERINTAHAN DAERAH";
+        aliasZona["ZONA PEMERINTAHAN NASIONAL"] = "PEMERINTAHAN NASIONAL";
+        aliasZona["ZONA PERKANTORAN, PERDAGANGAN, DAN JASA"] = "PERKANTORAN, PERDAGANGAN, DAN JASA";
+        aliasZona["ZONA PERKANTORAN, PERDAGANGAN, DAN JASA KDB RENDAH"] = "PERKANTORAN, PERDAGANGAN, DAN JASA KDB RENDAH";
+        aliasZona["ZONA PERUMAHAN KDB SEDANG-TINGGI"] = "PERUMAHAN KDB SEDANG-TINGGI";
+        aliasZona["ZONA PERUMAHAN VERTIKAL"] = "PERUMAHAN VERTIKAL";
+        aliasZona["ZONA PERWAKILAN NEGARA ASING"] = "PERWAKILAN NEGARA ASING";
+        aliasZona["ZONA TAMAN KOTA/LINGKUNGAN"] = "TAMAN KOTA/LINGKUNGAN";
+        aliasZona["ZONA TERBUKA BIRU"] = "TERBUKA BIRU";
+
+
 
 
         for (b = 0; b < labelArea.length; b++){
           pieData.push({
-            "Zone" : labelArea[b],
-            "Area" : dataArea[b]
+            "Zone" : aliasZona[labelArea[b]],
+            "Area" : dataArea[b],
+            "Color": colorData[b]
           })
         }
 
@@ -227,7 +244,7 @@ require([
         alias["CountArea"] = "Total Area (m2)";
         alias["Sheet1__zona"] = "Zona";
 
-        for (c = 0; c < result.features.length; c++) { 
+        for (c = 0; c < result.features.length; c++) {
           var featureAttributes = result.features[c].attributes;
             for (var attr in featureAttributes) {
                 resultItems.push("<b>" + alias[attr]+ ":</b>  " + featureAttributes[attr] + "<br>");
@@ -235,57 +252,22 @@ require([
 
               resultItems.push("<br>");
         }
-
-
-
-      
         dom.byId("summaryTxt").innerHTML = resultItems.join("");
 
-
-        var pie = AmCharts.makeChart("chartdiv2",
-        {
-          "type": "pie",
-          "balloonText": "[[title]]<br><span style='font-size:14px'>([[percents]]%)</span>",
-          "titleField": "Zone",
-          "valueField": "Area",
-          "colors": [
-            "#ff9932",
-            "#0ef71e",
-            "#702203",
-            "#ef94c5",
-            "#f90411",
-            "#67028e",
-            "#d98cf7",
-            "#f7ef02",
-            "#f9f56d",
-            "#f209cf",
-            "#4ff94f",
-            "#20a5e8"
-          ],
-          "labelRadius": 1,
-          "labelTickAlpha": 0,
-          "fontSize": 0,
-          "allLabels": [],
-          "balloon": {},
-          "legend": {
-            "enabled": true,
-            "switchType": "v",
-            "align": "center",
-            "bottom": 0,
-            "fontSize": 7,
-            "left": 6,
-            "marginBottom": -3,
-            "markerLabelGap": 4,
-            "markerSize": 13,
-            "position": "right",
-            "tabIndex": -1,
-            "valueText": ""
-          },
-          "titles": [],
-          "dataProvider": pieData
-        }
-      );
-
+        var chart = AmCharts.makeChart("chartdiv2", {
+            "type": "pie",
+            "dataProvider": pieData,
+            "valueField": "Area",
+            "titleField": "Zone",
+            "colorField": "Color",
+            "labelRadius": 6,
+            "labelTickAlpha": 0.2,
+            "fontSize" : 6,
+            "labelColorField": "color",
+            "balloon": {
+              "fixedPosition": true
+            }
+          });
 
         var chart = AmCharts.makeChart( "chartdiv", {
               "type": "serial",
@@ -334,7 +316,7 @@ require([
             } );
 
 
-        }); 
+        });
 
 
 

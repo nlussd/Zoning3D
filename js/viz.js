@@ -17,7 +17,7 @@
               $('#chartdiv, #chartdiv2, #summaryTxt').toggle();
           });
           $('.clickSummary').click(function(){
-              $('.clickBox, .welcome, #button, #search, #execute').hide();
+              $('.clickBox, .welcome, #button, #search, #execute, #summaryTxt').hide();
               $('.desc').show();
               $('.descTxt').text("We can see charts and statistics of zoning areas here");
               $('#chartdiv, #chartdiv2, .summary').fadeIn();
@@ -29,6 +29,7 @@
               $('#search, #execute').fadeIn();
           });
 
+        
 
 
 

@@ -321,6 +321,44 @@ require([
 
 
 
+      // contoh query untuk dapetin all building name
+      var queryBuildingTask = new QueryTask({
+        url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Building_HI_SampleMain/FeatureServer/0"
+      });
+
+      var queryBuilding = new Query();
+
+      queryBuilding.where = "1=1";
+      queryBuilding.outFields = ["NAME", "OBJECTID"];
+
+      queryBuildingTask.execute(queryBuilding).then(function(result){
+
+      // console.log(result);
+
+
+      var buildingName = [];
+      var buildingId = [];
+
+      //create loop for every result
+      for (j = 0;  j < result.features.length; j++) {
+
+      //push result to variable array
+      buildingName.push(result.features[j].attributes.NAME);
+      buildingId.push(result.features[j].attributes.OBJECTID);
+      }
+
+      // console.log(buildingName);
+      // // window.buildingList = buildingName;
+      // // var test = ["halo", "hello"];
+
+      $("#search").autocomplete({
+            source: buildingName
+      });
+
+
+    });
+
+
       //add FeatureLayer and SceneLayer to map
       map.addMany([sceneLayer, sceneLayer2, zoning]);
 

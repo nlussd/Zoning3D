@@ -125,7 +125,7 @@ html, body,
   z-index: 110;
   background-color: #3285ff;
   margin-right: 30px;
-  margin: 20px 0px 10px 0px;
+  margin: 20px 0px 10px 8px;
   text-align: center;
   font-size: 14pt;
   padding: 10px;
@@ -159,6 +159,18 @@ html, body,
 }
 
 #summaryTxt {
+  width: 95%;
+  height: 400px;
+  margin: auto;
+  z-index: 110;
+  display: none;
+  font-size: 8pt;
+  padding: 10px;
+  font-family: "Source Sans Pro", sans-serif;
+  /*background-color: gray;*/
+}
+
+#searchTxt {
   width: 95%;
   height: 400px;
   margin: auto;
@@ -209,7 +221,6 @@ html, body,
 }
 
 #execute{
-  /*float: left;*/
   height: 30px;
   width: 100px;
   z-index: 110;
@@ -222,7 +233,6 @@ html, body,
   border: 0.5px solid #3285ff;
   color: #3285ff;
   border-radius: 5px;
-  /*  box-shadow: 0px 1px 0.2px #888888;*/
   display: none;
   float: left;
 }
@@ -234,9 +244,6 @@ input[type=text] {
   padding: 5px 5px;
   margin: 8px 20%;
   box-sizing: border-box;
-  /*    float: left;*/
   right: 0px;
-  /*    display: inline-block;*/
-  /*    display: none;*/
 
 }

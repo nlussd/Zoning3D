@@ -131,7 +131,7 @@ require([
 
   // Create SceneLayer and add to the map
   var sceneLayer = new SceneLayer({
-    url: "https://tiles.arcgis.com/tiles/TWq7UjmDRPE14lEV/arcgis/rest/services/bundaran_HI_sample_building/SceneServer",
+    url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/BHI/SceneServer",
     popupEnabled: false,
     title: "Existing Building",
     visible: false
@@ -174,6 +174,7 @@ require([
       offset: 10
     },
     popupEnabled: false,
+    listMode: "hide",
     title: "Contoh Info"
   });
 
@@ -286,13 +287,6 @@ require([
         "gridAlpha": 0.2,
         "dashLength": 0
       } ],
-      // "titles": [
-      //   {
-      //     "id": "1",
-      //     "size": 15,
-      //     "text": "Zoning by Area"
-      //   }
-      // ],
       "gridAboveGraphs": true,
       "startDuration": 1,
       "graphs": [ {
@@ -324,7 +318,6 @@ require([
     });
   });
 
-
   // contoh query untuk dapetin all building name
   var queryBuildingTask = new QueryTask({
     url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Building_HI_SampleMain/FeatureServer/0"
@@ -340,9 +333,8 @@ require([
     var buildingName = [];
     var buildingId = [];
 
-    //create loop for every result
+
     for (j = 0;  j < result.features.length; j++) {
-      //push result to variable array
       buildingName.push(result.features[j].attributes.NAME);
       buildingId.push(result.features[j].attributes.OBJECTID);
     }
@@ -363,10 +355,28 @@ require([
     querySearch.returnGeometry = true;
     querySearch.outFields = ["NAME"];
 
+    //ini geometry yang dihasilkan dari query nama building
+    var geomSearch = [];
+
     queryBuildingTask.execute(querySearch).then(function(result){
-      console.log(result);
+      geomSearch.push(result.features["0"].geometry.longitude + "," + result.features["0"].geometry.latitude);
+
+    console.log(geomSearch);
+    // var queryBuildingZone = new Query();
+    // // queryBuildingZone.where = "1=1";
+    // queryBuildingZone.geometry = {106.82425878000004,-6.195507370999962};
+    // // queryBuildingZone.geometryType = "esriGeometryPoint";
+    // queryBuildingZone.returnGeometry = true;
+    // queryBuildingZone.spatialRelationship = "intersects";
+    // queryBuildingZone.outFields = ["*"];
+    //
+    // queryZoningTask.execute(queryBuildingZone).then(function(result) {
+    //   console.log(result);
+    // });
+
     });
   }
+
 
 
 

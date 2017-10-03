@@ -10,29 +10,25 @@
               $('.descTxt').text("We can see charts and statistics of zoning areas here");
           });
           $('.clickHome').click(function(){
-              $('#chartdiv, #chartdiv2, .clickBoxMain, .desc, .summary, #summaryTxt, #search, #execute').hide();
+              $('#chartdiv, #chartdiv2, .clickBoxMain, .desc, .summary, #summaryTxt, #search, #execute, #searchTxt').hide();
               $('.welcome, .clickBox').show();
           });
           $('.summary').click(function(){
               $('#chartdiv, #chartdiv2, #summaryTxt').toggle();
           });
           $('.clickSummary').click(function(){
-              $('.clickBox, .welcome, #button, #search, #execute, #summaryTxt').hide();
+              $('.clickBox, .welcome, #button, #search, #execute, #summaryTxt, #searchTxt').hide();
               $('.desc').show();
               $('.descTxt').text("We can see charts and statistics of zoning areas here");
               $('#chartdiv, #chartdiv2, .summary').fadeIn();
           });
           $('.clickSearch').click(function(){
-              $('.clickBox, .welcome, #button, #chartdiv, #chartdiv2, .summary, #summaryTxt').hide();
+              $('.clickBox, .welcome, #button, #chartdiv, #chartdiv2, .summary, #summaryTxt, #searchTxt').hide();
               $('.desc').show();
               $('.descTxt').text("We can search for individual building information. For example to see if the existing building fits into the zoning regulation. Type building name in the box below.");
               $('#search, #execute').fadeIn();
           });
-
-        
-
-
-
-
-
+          $('#execute').click(function(){
+              $('#searchTxt').show();
+          });
         });

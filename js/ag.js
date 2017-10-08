@@ -101,8 +101,7 @@ require([
 
     var template = {
       title: "{ID_SUB_BLO}",
-      content: "<img src='asset/building.png' height='50'>" + "<p><b>Info Zonasi</b></p>" +
-      "<table>" +
+      content: "<table><tr><th><img src='asset/building.png' height='50'></th>" + "<th><span style='margin:auto; display:table;'><b>Info Zonasi</b></span></th></tr>" +
       "<tr><td><b>Kecamatan</b></td><td>{KECAMATAN}</td></tr>" +
       "<tr><td><b>Kelurahan</b></td><td>{KELURAHAN}</td></tr>" +
       "<tr><td><b>ID Sub Blok</b></td><td>{ID_SUB_BLO}</td></tr>" +
@@ -115,6 +114,9 @@ require([
       "<tr><td><b>KTB</b></td><td>{KTB}</td></tr>" +
       "<tr><td><b>Tipe</b></td><td>{TIPE}</td></tr>" +
       "<tr><td><b>PSL</b></td><td>{PSL_1}</td></tr>" +
+      "<tr><td><b>Diizinkan</b></td><td>{DIIZINKAN}</td></tr>" +
+      "<tr><td><b>Terbatas</b></td><td>{TERBATAS}</td></tr>" +
+      "<tr><td><b>Bersyarat</b></td><td>{BERSYARAT}</td></tr>" +
       "</table>",
       fieldInfos: [{
         fieldName: "KECAMATAN",
@@ -151,6 +153,15 @@ require([
       },
       {
         fieldName: "KTB",
+      },
+      {
+        fieldName: "DIIZINKAN",
+      },
+      {
+        fieldName: "TERBATAS",
+      },
+      {
+        fieldName: "BERSYARAT",
       }
     ]
   };

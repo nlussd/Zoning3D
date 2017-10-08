@@ -7,7 +7,7 @@
           $('.clickBox').click(function(){
               $('.clickBox, .welcome').hide();
               $('#button, #chartdiv, #chartdiv2, .clickBoxMain, .desc, .summary').fadeIn();
-              $('.descTxt').text("We can see charts and statistics of zoning areas here");
+              $('.descTxt').text("Sub-zoning areas in Hectares (Ha)");
           });
           $('.clickHome').click(function(){
               $('#chartdiv, #chartdiv2, .clickBoxMain, .desc, .summary, #summaryTxt, #search, #execute, #searchTxt, #legend').hide();

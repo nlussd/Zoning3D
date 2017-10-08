@@ -7,7 +7,7 @@
 Specifically for Dinas Cipta Karya, Tata Ruang, dan Pertanahan (Spatial Planning and Land Agency) Jakarta.
 </p>
 <p>Demo data included in the application: zoning regulation, existing building, transportation hubs.</p>
-<p>For further information about this app you can contact Lsuwandi@esriindonesia.co.id</p>
+<p>For further information about this app you can contact <a href:"mailto:Lsuwandi@esriindonesia.co.id">Lsuwandi@esriindonesia.co.id</a></p>
 <br>
 <br>
 3D Team @esriindonesia :<br>

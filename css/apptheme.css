@@ -94,10 +94,10 @@ html, body,
 
 
 .welcome{
-  height: 100px;
-  width: 300px;
+  height: 250px;
+  width: 350px;
   z-index: 100;
-  margin: 200px auto 10px;
+  margin: 100px auto 10px;
   text-align: center;
   font-family: "Source Sans Pro", sans-serif;
 }
@@ -167,6 +167,7 @@ html, body,
   font-size: 8pt;
   padding: 10px;
   font-family: "Source Sans Pro", sans-serif;
+  overflow: scroll;
   /*background-color: gray;*/
 }
 
@@ -176,9 +177,22 @@ html, body,
   margin: auto;
   z-index: 110;
   display: none;
-  font-size: 8pt;
-  padding: 10px;
+  font-size: 12pt;
+  padding: 50px 10px 10px 10px;
   font-family: "Source Sans Pro", sans-serif;
+  /*background-color: gray;*/
+}
+
+#legend {
+  width: 95%;
+  height: 500px;
+  margin: auto;
+  z-index: 110;
+  display: none;
+  font-size: 12pt;
+  padding: 50px 10px 10px 10px;
+  font-family: "Source Sans Pro", sans-serif;
+  overflow:scroll;
   /*background-color: gray;*/
 }
 
@@ -210,6 +224,10 @@ html, body,
 
 }
 
+.clickLegend{
+
+}
+
 #search{
   width: 40%;
   height: 30px;
@@ -235,6 +253,10 @@ html, body,
   border-radius: 5px;
   display: none;
   float: left;
+}
+
+table{
+  border-collapse: collapse;
 }
 
 

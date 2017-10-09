@@ -271,22 +271,67 @@ require([
     }
 
     var pieData = [];
-    // var colorData = ["#ff9932", "#0ef71e", "#702203", "#ef94c5","#67028e","#f7ef02","#f9f56d", "#f209cf","#4ff94f","#20a5e8"];
 
+    var color={};
+
+    color["B.1"]="#00DAFE";
+    color["C.1"]="#FAAA00";
+    color["C.3"]="#FAAA00";
+    color["C.4"]="#FAAA00";
+    color["L.1"]="#00734D";
+    color["H.1"]="#4C7300";
+    color["H.2"]="#55FF00";
+    color["H.3"]="#AAFF00";
+    color["H.4"]="#44CC00";
+    color["H.5"]="#44CC00";
+    color["H.6"]="#44CC00";
+    color["H.7"]="#AAFF00";
+    color["G.1"]="#EBEBEB";
+    color["G.2"]="#CCB4B4";
+    color["I.1"]="#787878";
+    color["I.2"]="#787878";
+    color["I.3"]="#787878";
+    color["I.4"]="#B2B2B2";
+    color["I.5"]="#B2B2B2";
+    color["I.6"]="#B2B2B2";
+    color["K.1"]="#8400A8";
+    color["K.2"]="#8400A8";
+    color["K.3"]="#DF73FF";
+    color["K.4"]="#DF73FF";
+    color["P.1"]="#FF0000";
+    color["P.2"]="#FF00C5";
+    color["P.3"]="#FF7F7F";
+    color["R.1"]="#FFFF00";
+    color["R.2"]="#FFFF00";
+    color["R.3"]="#FFFF00";
+    color["R.4"]="#FFFF00";
+    color["R.5"]="#FFFF00";
+    color["R.6"]="#FFFF00";
+    color["R.7"]="#FFFF00";
+    color["R.8"]="#FFFF00";
+    color["R.9"]="#FFFFA0";
+    color["S.1"]="#8A4545";
+    color["S.2"]="#8A4545";
+    color["S.3"]="#8A4545";
+    color["S.4"]="#8A4545";
+    color["S.5"]="#8A4545";
+    color["S.6"]="#894444";
+    color["S.7"]="#894444";
+    color["S.8"]="#8A4545";
 
     for (i = 0; i < labelArea.length; i++){
       pieData.push({
         "Zone" : labelArea[i],
         "Area" : dataArea[i],
-        // "Color": colorData[i]
+        "Color": color[labelArea[i]]
       })
     }
 
     console.log(pieData);
 
-    var alias = {};
-    alias["CountArea"] = "Total Area (Ha)";
-    alias["SUBZONA"] = "Sub Zona";
+
+
+
 
     var featureResult = ["<table border='1'><tr><td width='125'><b>Zona</b></td><td width='125'><b>Sub Zona</b></td><td width='50'><b>Kode Sub Zona</b></td><td width='100'><b>Luas Total(Ha)</b></td></tr></table>"];
 
@@ -302,11 +347,11 @@ require([
       "dataProvider": pieData,
       "valueField": "Area",
       "titleField": "Zone",
-      // "colorField": "Color",
+      "colorField": "Color",
       "labelRadius": 6,
       "labelTickAlpha": 0.2,
       "fontSize" : 6,
-      // "labelColorField": "color",
+      "labelColorField": "color",
       "balloon": {
         "fixedPosition": true
       }

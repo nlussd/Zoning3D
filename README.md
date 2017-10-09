@@ -10,9 +10,6 @@ Specifically for Dinas Cipta Karya, Tata Ruang, dan Pertanahan (Spatial Planning
 <p>For further information about this app you can contact <a href:"mailto:Lsuwandi@esriindonesia.co.id">Lsuwandi@esriindonesia.co.id</a></p>
 <br>
 <br>
-3D Team @esriindonesia :<br>
-Lusi Suwandi, Ivan Aryant Putra, Arsha Yuditha Amiranti, Vivaldi Rinaldi, Alify Raisa Octaviani, Khairul Amri
-<br>
 <br>
 
 <a href="https://nlussd.github.io/Zoning3D/index.html">Demo</a>

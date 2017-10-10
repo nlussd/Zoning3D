@@ -375,7 +375,8 @@ require([
         "fillAlphas": 0.8,
         "lineAlpha": 0.2,
         "type": "column",
-        "valueField": "Area"
+        "valueField": "Area",
+        "colorField": "Color"
       } ],
       "chartCursor": {
         "categoryBalloonEnabled": false,
@@ -479,10 +480,6 @@ require([
         ", Koefisien Lantai Bangunan (KLB) " + result.features["0"].attributes.KLB + ", dan Ketinggian Maksimum Bangunan "
         + result.features["0"].attributes.KB + " lantai.<br>"
         + "Lihat <a href='asset/itbx.pdf' target='_blank'>table ITBX</a>";
-
-        // var searchResultTextCap = searchResultText.toUpperCase();
-        //
-        // console.log(searchResultTextCap);
 
         $('.searchDesc').html(searchResultText);
 

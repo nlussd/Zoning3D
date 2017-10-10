@@ -170,10 +170,9 @@ require([
   var sceneLayer = new SceneLayer({
     url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/arcgis/rest/services/Jakpus_bldg/SceneServer",
     popupEnabled: false,
-    title: "Existing Building",
+    title: "Existing Building (Main)",
     visible: false
   });
-
 
   // create SceneLayer for zoning 3D and add to map
   var sceneLayer2 = new SceneLayer({
@@ -181,6 +180,13 @@ require([
     popupEnabled: true,
     popupTemplate: template,
     title: "Zoning Building Envelope (3D)"
+  });
+
+  var sceneLayer3 = new SceneLayer({
+    url: "https://services8.arcgis.com/TWq7UjmDRPE14lEV/ArcGIS/rest/services/Jakpus_rest/SceneServer/layers/1",
+    popupEnabled: false,
+    title: "Existing Building (Rest)",
+    visible: false
   });
 
 
@@ -224,7 +230,7 @@ require([
   });
 
   //add FeatureLayer and SceneLayer to map
-  map.addMany([sceneLayer, sceneLayer2, zoning, krl, halte]);
+  map.addMany([sceneLayer3, sceneLayer, sceneLayer2, zoning, krl, halte]);
 
 
   // Create query task for zoning Feature Service
@@ -328,10 +334,6 @@ require([
     }
 
     console.log(pieData);
-
-
-
-
 
     var featureResult = ["<table border='1'><tr><td width='125'><b>Zona</b></td><td width='125'><b>Sub Zona</b></td><td width='50'><b>Kode Sub Zona</b></td><td width='100'><b>Luas Total(Ha)</b></td></tr></table>"];
 
@@ -517,6 +519,20 @@ require([
   // Add the renderer to sceneLayer
   sceneLayer2.renderer = new SimpleRenderer({
     symbol: symbol2
+  });
+
+
+  var symbol3 = new MeshSymbol3D(
+    new FillSymbol3DLayer({
+      // If the value of material is not assigned, the default color will be grey
+      material: {
+        // color: [211, 211, 111]
+      }
+    })
+  );
+  // Add the renderer to sceneLayer
+  sceneLayer3.renderer = new SimpleRenderer({
+    symbol: symbol3
   });
 
 

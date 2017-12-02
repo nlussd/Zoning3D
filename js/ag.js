@@ -254,76 +254,76 @@ require([
 
   queryZoningTask.execute(queryArea).then(function(result){
 
-    console.log(result);
+  console.log(result);
 
-    //Crate variable for query result array untuk yang query area nich
-    var labelArea = [];
-    var dataArea = [];
-    var zonaName = [];
-    var subZonaName = [];
+  //Crate variable for query result array untuk yang query area nich
+  var labelArea = [];
+  var dataArea = [];
+  var zonaName = [];
+  var subZonaName = [];
 
-    //create loop for every result
-    for (i = 0; i < result.features.length; i++) {
-      console.log(result.features[i].attributes.CountArea);
-      console.log(result.features[i].attributes.SUBZONA);
-      console.log(result.features[i].attributes.ZONA);
-      console.log(result.features[i].attributes.SUB_ZONA_D);
+  //create loop for every result
+  for (i = 0; i < result.features.length; i++) {
+    console.log(result.features[i].attributes.CountArea);
+    console.log(result.features[i].attributes.SUBZONA);
+    console.log(result.features[i].attributes.ZONA);
+    console.log(result.features[i].attributes.SUB_ZONA_D);
 
-      //push result to variable array
-      dataArea.push(result.features[i].attributes.CountArea);
-      labelArea.push(result.features[i].attributes.SUBZONA);
-      zonaName.push(result.features[i].attributes.ZONA);
-      subZonaName.push(result.features[i].attributes.SUB_ZONA_D);
-    }
+    //push result to variable array
+    dataArea.push(result.features[i].attributes.CountArea);
+    labelArea.push(result.features[i].attributes.SUBZONA);
+    zonaName.push(result.features[i].attributes.ZONA);
+    subZonaName.push(result.features[i].attributes.SUB_ZONA_D);
+  }
 
-    var pieData = [];
+  var pieData = [];
 
-    var color={};
-
-    color["B.1"]="#00DAFE";
-    color["C.1"]="#FAAA00";
-    color["C.3"]="#FAAA00";
-    color["C.4"]="#FAAA00";
-    color["L.1"]="#00734D";
-    color["H.1"]="#4C7300";
-    color["H.2"]="#55FF00";
-    color["H.3"]="#AAFF00";
-    color["H.4"]="#44CC00";
-    color["H.5"]="#44CC00";
-    color["H.6"]="#44CC00";
-    color["H.7"]="#AAFF00";
-    color["G.1"]="#EBEBEB";
-    color["G.2"]="#CCB4B4";
-    color["I.1"]="#787878";
-    color["I.2"]="#787878";
-    color["I.3"]="#787878";
-    color["I.4"]="#B2B2B2";
-    color["I.5"]="#B2B2B2";
-    color["I.6"]="#B2B2B2";
-    color["K.1"]="#8400A8";
-    color["K.2"]="#8400A8";
-    color["K.3"]="#DF73FF";
-    color["K.4"]="#DF73FF";
-    color["P.1"]="#FF0000";
-    color["P.2"]="#FF00C5";
-    color["P.3"]="#FF7F7F";
-    color["R.1"]="#FFFF00";
-    color["R.2"]="#FFFF00";
-    color["R.3"]="#FFFF00";
-    color["R.4"]="#FFFF00";
-    color["R.5"]="#FFFF00";
-    color["R.6"]="#FFFF00";
-    color["R.7"]="#FFFF00";
-    color["R.8"]="#FFFF00";
-    color["R.9"]="#FFFFA0";
-    color["S.1"]="#8A4545";
-    color["S.2"]="#8A4545";
-    color["S.3"]="#8A4545";
-    color["S.4"]="#8A4545";
-    color["S.5"]="#8A4545";
-    color["S.6"]="#894444";
-    color["S.7"]="#894444";
-    color["S.8"]="#8A4545";
+  //https://stackoverflow.com/questions/4348478/what-is-the-difference-between-object-keys-with-quotes-and-without-quotes
+  var color={
+    "B.1" : "#00DAFE",
+    "C.1" : "#FAAA00",
+    "C.3" : "#FAAA00",
+    "C.4" : "#FAAA00",
+    "L.1" : "#00734D",
+    "H.1" : "#4C7300",
+    "H.2" : "#55FF00",
+    "H.3" : "#AAFF00",
+    "H.4" : "#44CC00",
+    "H.5" : "#44CC00",
+    "H.6" : "#44CC00",
+    "H.7" : "#AAFF00",
+    "G.1" : "#EBEBEB",
+    "G.2" : "#CCB4B4",
+    "I.1" : "#787878",
+    "I.3" : "#787878",
+    "I.4" : "#B2B2B2",
+    "I.5" : "#B2B2B2",
+    "I.6" : "#B2B2B2",
+    "K.1" : "#8400A8",
+    "K.2" : "#8400A8",
+    "K.3" : "#DF73FF",
+    "K.4" : "#DF73FF",
+    "P.1" : "#FF0000",
+    "P.2" : "#FF00C5",
+    "P.3" : "#FF7F7F",
+    "R.1" : "#FFFF00",
+    "R.2" : "#FFFF00",
+    "R.3" : "#FFFF00",
+    "R.4" : "#FFFF00",
+    "R.5" : "#FFFF00",
+    "R.6" : "#FFFF00",
+    "R.7" : "#FFFF00",
+    "R.8" : "#FFFF00",
+    "R.9" : "#FFFFA0",
+    "S.1" : "#8A4545",
+    "S.2" : "#8A4545",
+    "S.3" : "#8A4545",
+    "S.4" : "#8A4545",
+    "S.5" : "#8A4545",
+    "S.6" : "#894444",
+    "S.7" : "#894444",
+    "S.8" : "#8A4545"
+  };
 
     for (i = 0; i < labelArea.length; i++){
       pieData.push({
